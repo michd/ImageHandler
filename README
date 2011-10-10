@@ -36,7 +36,7 @@ Basic Usage:
 5) Save to a new image file
 
     $ih->Save('id_for_resized_img', 'path/to/folder/', 'base_filename',
-      ImageHandler::TYPE_JPEF);
+      ImageHandler::TYPE_JPEG);
 
 6) Done!
 
