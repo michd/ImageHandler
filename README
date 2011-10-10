@@ -1,0 +1,46 @@
+This class eases handling image uploads a lot.
+Firstly, it checks if the file is a valid image, that is no larger than a 
+maximum you can set in the constants. Then it checks if the image file is 
+actually valid, by loading it into an image resource.
+
+Then, you can resize said image. The image that will contain the resized version
+gets its own ID. Resizing can be done in 3 ways: absolute stretch, shrink but 
+keep aspect ratio, or crop center to resize to absolute dimensions.
+Then, files can be saved in either JPG, GIF or PNG. For JPG, you can specify a 
+quality of 1-100.
+
+When working with many different versions of the image, the class stores the 
+image that's not being worked with away as a full-quality PNG, in a temporary 
+folder. These temporary files are deleted when the instance is unset or the
+script terminates, so it doesn't leave any waste behind.
+
+- - - - - - - - - - - - - - -
+
+Basic Usage:
+
+1) Include the class in your script.
+2) Instantiate an image handler:
+
+    $ih = new ImageHandler($cur_file, ImageHandler::TYPE_ALL);
+
+  where $cur_file is a valid file from the $_FILES superglobal
+3) (optional, but recommended) Check whether the handler initialized correctly.
+
+    if($ih->IsInitialized()) { ... }
+
+4) Create a resized version of the uploaded image
+
+    $ih->Resize('id_for_resized_img', ImageHandler::RESIZE_SHRINK_KEEP_ASPECT,
+      400, 300); //For a width of 400px, height of 300px.
+
+5) Save to a new image file
+
+    $ih->Save('id_for_resized_img', 'path/to/folder/', 'base_filename',
+      ImageHandler::TYPE_JPEF);
+
+6) Done!
+
+Note: most of these functions (like Resize and Save) return a boolean informing
+you of the success of the requested operation.
+Any error information is available in public properties $ih->SafeErrorMessage 
+and $ih->DebugErrorMessage.
