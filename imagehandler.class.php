@@ -19,7 +19,7 @@
   *
   * AR = Aspect Ratio
   */
-  class ImageHandler implements
+  class ImageHandler
   {
     /**
     * Identifier for originnal image, when no custom one was made
@@ -256,7 +256,7 @@
               '(' . __METHOD__ . ') filesize(' . $fileArray['size'] . ') > '
               . 'MAX_INPUT_FILESIZE (' . self::MAX_INPUT_FILESIZE . ')';
             $this->SafeErrorMessage = 'The image you uploaded was too big to '
-              . 'process. Please reduce its filesize so it\'s below less '
+              . 'process. Please reduce its filesize so it\'s less '
               . 'than 5MB.';
           }
         }
